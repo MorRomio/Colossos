@@ -1,0 +1,38 @@
+﻿@model AuthSys.Models.Member
+
+@{
+    ViewBag.Title = "Medlem";
+}
+
+<h2>Member</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                @Html.LabelFor(model => model.FirstName)
+                @Html.TextBoxFor(model => model.FirstName, new {maxlength = "50", size = "50"})
+                <br /><br />
+                @Html.LabelFor(model => model.LastName)
+                @Html.TextBoxFor(model => model.LastName, new { maxlength = "50", size = "50" })
+                <br /><br />
+                @Html.LabelFor(model => model.BirthDate)
+                @Html.TextBoxFor(model => model.BirthDate, new { @type = "date"})
+                <br /><br />
+                @Html.LabelFor(model => model.SportType)
+                @Html.TextBoxFor(model => model.SportType, new { maxlength = "50", size = "50" })
+                <br /><br />
+                <input type="submit" value="Opret" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<div>
+    @Html.ActionLink("Back to List", "Index")
+</div>
