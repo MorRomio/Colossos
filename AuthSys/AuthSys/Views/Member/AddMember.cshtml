@@ -1,4 +1,4 @@
-﻿@model AuthSys.Models.Member
+﻿@model AuthSys.ViewModels.MemberViewModel
 
 @{
     ViewBag.Title = "Medlem";
@@ -6,33 +6,43 @@
 
 <h2>Member</h2>
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("AddMember", "Member", FormMethod.Post ))
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <hr />
+        <div class="imageComponent">
+            <div class="memberPhoto">
+                <p>Billed mangler</p>
+                <br />
+            </div>
+            <input type="button" value="Tag et billed" style="float:right; margin-right: 20px;" />
+        </div>
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">
+            <div class="col-md-offset-2 col-md-10">                
+                <br />
                 @Html.LabelFor(model => model.FirstName)
-                @Html.TextBoxFor(model => model.FirstName, new {maxlength = "50", size = "50"})
+                @Html.TextBoxFor(model => model.FirstName, new { maxlength = "50", size = "50", @class = "AddMemberControls" })
                 <br /><br />
                 @Html.LabelFor(model => model.LastName)
-                @Html.TextBoxFor(model => model.LastName, new { maxlength = "50", size = "50" })
+                @Html.TextBoxFor(model => model.LastName, new { maxlength = "50", size = "50", @class = "AddMemberControls" })
                 <br /><br />
                 @Html.LabelFor(model => model.BirthDate)
-                @Html.TextBoxFor(model => model.BirthDate, new { @type = "date"})
+                @Html.TextBoxFor(model => model.BirthDate, new { size = "50", @type = "date", @class = "AddMemberControls" })
+                <br /><br />
+                @Html.LabelFor(model => model.Age)
+                @Html.TextBoxFor(model => model.Age, new { maxlength = "3", size = "50", @class = "AddMemberControls" })
                 <br /><br />
                 @Html.LabelFor(model => model.SportType)
-                @Html.TextBoxFor(model => model.SportType, new { maxlength = "50", size = "50" })
+                @Html.TextBoxFor(model => model.SportType, new { maxlength = "50", size = "50", @class = "AddMemberControls" })
                 <br /><br />
                 <input type="submit" value="Opret" class="btn btn-default" />
-            </div>
+            </div>            
         </div>
     </div>
 }
 
 <div>
-    @Html.ActionLink("Back to List", "Index")
+    @Html.ActionLink("Registrerede medlemmer", "RegisteredMembers")    
 </div>

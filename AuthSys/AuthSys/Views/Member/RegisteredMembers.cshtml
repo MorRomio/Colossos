@@ -1,66 +1,38 @@
-﻿@model AuthSys.Models.Member
+﻿@model IEnumerable<AuthSys.Models.Member>
 
 @{
     ViewBag.Title = "Registrede medlemmer";
 }
 
-<h2>RegisteredMembers</h2>
+<div>
+    <hr />
+    <table class="table table-dark table-striped table-hover">
+        <thead>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
+                <th>@Html.DisplayNameFor(model => model.CreationDate)</th>
+                <th>@Html.DisplayNameFor(model => model.Age)</th>
+                <th>@Html.DisplayNameFor(model => model.SportType)</th>
+            </tr>
+
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(m => item.FirstName)</td>
+                    <td>@Html.DisplayFor(m => item.LastName)</td>
+                    <td>@Html.DisplayFor(m => item.BirthDate)</td>
+                    <td>@Html.DisplayFor(m => item.CreationDate)</td>
+                    <td>@Html.DisplayFor(m => item.Age)</td>
+                    <td>@Html.DisplayFor(m => item.SportType)</td>
+                </tr>
+            }
+        </thead>
+    </table>
+    
+</div>
 
 <div>
-    <h4>Member</h4>
-    <hr />
-    <dl class="dl-horizontal">
-        <dt>
-            @Html.DisplayNameFor(model => model.FirstName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.FirstName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.LastName)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.LastName)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.BirthDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.BirthDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.CreationDate)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.CreationDate)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.Age)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.Age)
-        </dd>
-
-        <dt>
-            @Html.DisplayNameFor(model => model.SportType)
-        </dt>
-
-        <dd>
-            @Html.DisplayFor(model => model.SportType)
-        </dd>
-
-    </dl>
+    @Html.ActionLink("Tilføj medlem", "AddMember")
 </div>
-<p>
-    @Html.ActionLink("Rediger", "EditMember", new { id = Model.MemberID }) 
-    @Html.ActionLink("Back to List", "AddMember")
-</p>

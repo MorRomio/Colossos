@@ -1,0 +1,14 @@
+﻿
+.AddMemberControls {
+    float: right;
+    background-color: lightblue;
+    margin-right: 300px;
+}
+
+.memberPhoto {
+    float: right;
+    width: 90px;
+    height: 80px;
+    background-color: orange;
+    margin-right: 300px;    
+}

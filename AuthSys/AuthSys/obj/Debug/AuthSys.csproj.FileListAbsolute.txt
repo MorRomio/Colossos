@@ -27,6 +27,8 @@ C:\git\colossos\AuthSys\AuthSys\bin\System.Web.WebPages.Deployment.dll
 C:\git\colossos\AuthSys\AuthSys\bin\System.Web.WebPages.dll
 C:\git\colossos\AuthSys\AuthSys\bin\System.Web.WebPages.Razor.dll
 C:\git\colossos\AuthSys\AuthSys\bin\WebGrease.dll
+C:\git\colossos\AuthSys\AuthSys\bin\EntityFramework.xml
+C:\git\colossos\AuthSys\AuthSys\bin\EntityFramework.SqlServer.xml
 C:\git\colossos\AuthSys\AuthSys\bin\System.Web.Helpers.xml
 C:\git\colossos\AuthSys\AuthSys\bin\System.Web.Mvc.xml
 C:\git\colossos\AuthSys\AuthSys\bin\System.Web.Optimization.xml
@@ -36,8 +38,6 @@ C:\git\colossos\AuthSys\AuthSys\bin\System.Web.WebPages.Deployment.xml
 C:\git\colossos\AuthSys\AuthSys\bin\System.Web.WebPages.Razor.xml
 C:\git\colossos\AuthSys\AuthSys\bin\Antlr3.Runtime.pdb
 C:\git\colossos\AuthSys\AuthSys\bin\Newtonsoft.Json.xml
-C:\git\colossos\AuthSys\AuthSys\bin\EntityFramework.xml
-C:\git\colossos\AuthSys\AuthSys\bin\EntityFramework.SqlServer.xml
 C:\git\colossos\AuthSys\AuthSys\bin\Microsoft.AspNet.Identity.Core.xml
 C:\git\colossos\AuthSys\AuthSys\bin\Microsoft.AspNet.Identity.Owin.xml
 C:\git\colossos\AuthSys\AuthSys\bin\Microsoft.AspNet.Identity.EntityFramework.xml

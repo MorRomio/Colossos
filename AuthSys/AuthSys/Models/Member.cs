@@ -1,16 +1,18 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
 
 namespace AuthSys.Models
 {
-    public class Member
+    public class Member //Implementing IEnumerable makes sure we can loop over the members in the View
     {     
         public int MemberID { get; set; }
 
-        public Card card;
+        [Display(Name = "Medlemskort")]
+        public string AssociatedCard { get; set; }
 
         [Display(Name="Fornavn")]
         public string FirstName { get; set; }
@@ -19,6 +21,8 @@ namespace AuthSys.Models
         public string LastName { get; set; }
 
         [Display(Name="Fødselsdato")]
+       // [DataType(DataType.Date)]
+        [Column(TypeName = "datetime2")]
         public DateTime BirthDate { get; set; }
 
         [Display(Name="Medlem siden")]
@@ -27,7 +31,7 @@ namespace AuthSys.Models
         public DateTime CreationDate { get; set; }
 
         [Display(Name = "Alder")]
-        public Int16 Age { get; set; }
+        public int Age { get; set; }
 
         [Display(Name="Sportsgren")]
         public string SportType { get; set; }
@@ -35,8 +39,10 @@ namespace AuthSys.Models
         [Display(Name="Tilføj kort")]
         public bool AddCard { get; set; }
 
-        [Display(Name = "Medlemskort")]
-        public string AssociatedCard { get; set; }
+        public string imageReference { get; set; }
+
+        //Type ICollection allows entries to be added, deleted and updated
+        public virtual ICollection<Card> cards { get; set; }  //Making a relation to the Card table
         
     }
 }
