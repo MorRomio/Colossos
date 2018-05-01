@@ -1,10 +1,10 @@
 ﻿using AuthSys.DataAccessLayer;
 using AuthSys.Models;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
+using AuthSys.ViewModels;
+using System.Threading;
+using System.Globalization;
 
 namespace AuthSys.Controllers
 {
@@ -17,14 +17,21 @@ namespace AuthSys.Controllers
             return View("AddMember");
         }
 
-        public ActionResult AddMember(string firstName, string lastName, DateTime birthDate, int age, string sportType)
+        [HttpPost]
+        public ActionResult AddMember(MemberViewModel model)
         {
-            var member = new Member() { FirstName = firstName, LastName = lastName, Age = age, SportType = sportType, BirthDate = birthDate };
+            var member = new Member() {
+                FirstName = model.FirstName,
+                LastName = model.LastName,
+                Age = model.Age,
+                BirthDate = model.BirthDate,
+                SportType = model.SportType
+            };
 
             coloContext.Members.Add(member);
             coloContext.SaveChanges();  
          
-            return View();
+            return View(member);
         }
 
         public ActionResult RegisteredMembers()

@@ -20,14 +20,13 @@ namespace AuthSys.Models
         [Display(Name="Efternavn")]
         public string LastName { get; set; }
 
-        [Display(Name="Fødselsdato")]
-       // [DataType(DataType.Date)]
-        [Column(TypeName = "datetime2")]
+        [Display(Name="Fødselsdato")]        
+        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
 
         [Display(Name="Medlem siden")]
         [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+      //  [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime CreationDate { get; set; }
 
         [Display(Name = "Alder")]
