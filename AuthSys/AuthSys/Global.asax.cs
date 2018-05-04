@@ -13,9 +13,7 @@ namespace AuthSys
     public class MvcApplication : System.Web.HttpApplication
     {
         protected void Application_Start()
-        {
-            Thread.CurrentThread.CurrentCulture = new CultureInfo("da-DK");
-
+        {            
             AreaRegistration.RegisterAllAreas();
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);

@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Web;
+using System.Web.Mvc;
 
 namespace AuthSys.Models
 {
@@ -21,19 +22,17 @@ namespace AuthSys.Models
         public string LastName { get; set; }
 
         [Display(Name="Fødselsdato")]        
-        //[DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
 
-        [Display(Name="Medlem siden")]
-        [DataType(DataType.Date)]
-      //  [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
-        public DateTime CreationDate { get; set; }
+        [Display(Name="Medlem siden")]      
+        public DateTime DateCreate { get; set; }
 
         [Display(Name = "Alder")]
         public int Age { get; set; }
 
         [Display(Name="Sportsgren")]
-        public string SportType { get; set; }
+        public string SportTypes { get; set; }
 
         [Display(Name="Tilføj kort")]
         public bool AddCard { get; set; }

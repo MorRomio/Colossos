@@ -13,10 +13,10 @@ namespace AuthSys.ViewModels
       
         public DateTime BirthDate { get; set; }       
                 
-        public DateTime CreationDate { get; set; }      
+        public DateTime DateCreate { get; set; }      
   
-        public int Age { get; set; }        
+        public int? Age { get; set; }        
 
-        public string SportType { get; set; }
+        public string SportTypes { get; set; }
     }
 }

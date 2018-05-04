@@ -1,48 +1,72 @@
-﻿@model AuthSys.ViewModels.MemberViewModel
+﻿@model AuthSys.Models.Member
 
 @{
-    ViewBag.Title = "Medlem";
+    ViewBag.Title = "Nyt medlem";
 }
 
-<h2>Member</h2>
+<h2>Tilføj medlem</h2>
 
-@using (Html.BeginForm("AddMember", "Member", FormMethod.Post ))
+
+@using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <div class="imageComponent">
-            <div class="memberPhoto">
-                <p>Billed mangler</p>
-                <br />
-            </div>
-            <input type="button" value="Tag et billed" style="float:right; margin-right: 20px;" />
-        </div>
+        <h4>Member</h4>
+        <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            <div class="col-md-offset-2 col-md-10">                
-                <br />
-                @Html.LabelFor(model => model.FirstName)
-                @Html.TextBoxFor(model => model.FirstName, new { maxlength = "50", size = "50", @class = "AddMemberControls" })
-                <br /><br />
-                @Html.LabelFor(model => model.LastName)
-                @Html.TextBoxFor(model => model.LastName, new { maxlength = "50", size = "50", @class = "AddMemberControls" })
-                <br /><br />
-                @Html.LabelFor(model => model.BirthDate)
-                @Html.TextBoxFor(model => model.BirthDate, new { @type = "date", @class = "AddMemberControls" })
-                <br /><br />
-                @Html.LabelFor(model => model.Age)
-                @Html.TextBoxFor(model => model.Age, new { maxlength = "3", size = "50", @class = "AddMemberControls" })
-                <br /><br />
-                @Html.LabelFor(model => model.SportType)
-                @Html.TextBoxFor(model => model.SportType, new { maxlength = "50", size = "50", @class = "AddMemberControls" })
-                <br /><br />
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control AddMemberControls", maxlength = "50", size = "50" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control AddMemberControls", maxlength = "50", size = "50" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.BirthDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.BirthDate, new { @class = "form-control AddMemberControls", maxlength = "50", size = "50", @type = "date" })
+                @Html.ValidationMessageFor(model => model.BirthDate, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.TextBoxFor(model => model.Age, new { @readonly = "readonly", @class = "form-control AddMemberControls", maxlength = "3", @placeholder = "Alder udfyldes automatisk" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.SportTypes, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.SportTypes, new { htmlAttributes = new { @class = "form-control AddMemberControls", maxlength = "50", size = "50" } })
+                @Html.ValidationMessageFor(model => model.SportTypes, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
                 <input type="submit" value="Opret" class="btn btn-default" />
-            </div>            
+            </div>
         </div>
     </div>
 }
+<p style="color: @ViewBag.TextColor; font-size: 22px;">@ViewBag.Message</p>
 
 <div>
-    @Html.ActionLink("Registrerede medlemmer", "RegisteredMembers")    
+    @Html.ActionLink("Registrerede medlemmer", "RegisteredMembers")
+</div>
+<div style="display: none" id="confirmBox">
+    <p>Medlem tilføjet</p>
 </div>

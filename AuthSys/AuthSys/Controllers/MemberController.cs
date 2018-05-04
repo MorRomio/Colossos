@@ -3,42 +3,62 @@ using AuthSys.Models;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using AuthSys.ViewModels;
-using System.Threading;
-using System.Globalization;
+using System;
+using System.Net;
+using System.Linq;
 
 namespace AuthSys.Controllers
 {
     public class MemberController : Controller
     {
-        private ColossosContext coloContext = new ColossosContext();
-
-        public ActionResult AddMemberInit()
-        {
-            return View("AddMember");
-        }
+        private ColossosContext DBContext = new ColossosContext();
 
         [HttpPost]
+        [ValidateAntiForgeryToken] //Prevent cross-site request forgery
         public ActionResult AddMember(MemberViewModel model)
         {
-            var member = new Member() {
+            ViewBag.Message = "";
+
+            DateTime today = DateTime.Now;
+            double days = today.Subtract(model.BirthDate).TotalDays;
+            int memberAge = (int)Math.Truncate(days / 365);
+
+            var member = new Member()
+            {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
-                Age = model.Age,
+                Age = memberAge,
                 BirthDate = model.BirthDate,
-                SportType = model.SportType
+                SportTypes = model.SportTypes,
+                DateCreate = DateTime.Now
             };
 
-            coloContext.Members.Add(member);
-            coloContext.SaveChanges();  
-         
-            return View(member);
+            if (ModelState.IsValid)
+            {
+                DBContext.Members.Add(member);
+                DBContext.SaveChanges();
+
+                ViewBag.TextColor = "Green";
+                ViewBag.Message = "Medlem tilføjet";
+                return View(member);                
+            }
+
+            ViewBag.TextColor = "Red";
+            ViewBag.Message = "Bruger ikke gemt";
+            return View();
         }
+
+        [HttpGet]
+        public ActionResult AddMember()
+        {
+            return View("AddMember");
+        }       
 
         public ActionResult RegisteredMembers()
         {
             List<Member> members = new List<Member>();
 
-            foreach (var m in coloContext.Members)
+            foreach (var m in DBContext.Members)
             {
                 members.Add(m);
             }            
@@ -46,9 +66,95 @@ namespace AuthSys.Controllers
             return View(members);
         }
 
-        public ActionResult EditMember(int? id)
+        [HttpGet]
+        public ActionResult EditMember(EditMemberViewModel model) 
         {
+            Member members = new Member();
+            var member = DBContext.Members.Find(model.MemberID);
+
+            return View(member);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken] //Prevent cross-site request forgery
+        public ActionResult EditMember(Member model)
+        {
+            Member members = new Member();
+            var member = DBContext.Members.Find(model.MemberID);
+
+            DateTime today = DateTime.Now;
+            double days = today.Subtract(model.BirthDate).TotalDays;
+            int memberAge = (int)Math.Truncate(days / 365);
+
+            if (member == null)
+            {
+                return HttpNotFound();
+            }
+
+            if(ModelState.IsValid)
+            {
+                member.MemberID = model.MemberID;
+                member.FirstName = model.FirstName;
+                member.LastName = model.LastName;
+                member.BirthDate = model.BirthDate;
+                member.SportTypes = model.SportTypes;
+                member.Age = memberAge;
+                            
+                DBContext.SaveChanges();
+
+                return View(member);
+            }
+
             return View();
+        }
+
+        [HttpGet]
+        public ActionResult DeleteMember(int? MemberID)
+        {
+            var member = DBContext.Members.Find(MemberID);
+
+            return View(member);
+        }
+
+        [HttpPost, ActionName("DeleteMember")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteMemberPost(int? MemberID)
+        {
+            ViewBag.Message = "";
+
+            var member = DBContext.Members.Find(MemberID);
+
+            if (MemberID == null)
+            {
+                ViewBag.TextColor = "Red";
+                ViewBag.Message = "Medlem eksisterer ikke";
+
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+
+            if (ModelState.IsValid)
+            {
+                DBContext.Members.Remove(member);
+                DBContext.SaveChanges();
+
+                ViewBag.TextColor = "Green";
+                ViewBag.Message = "Medlem slettet";
+
+                return RedirectToAction("RegisteredMembers");
+            }
+
+            ViewBag.TextColor = "Red";
+            ViewBag.Message = "Medlem blev ikke slettet. Prøv venlist igen";
+
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult MemberDetails(int MemberID)
+        {
+            var member = DBContext.Members.Find(MemberID);
+
+            return View(member);
         }
     }
 }

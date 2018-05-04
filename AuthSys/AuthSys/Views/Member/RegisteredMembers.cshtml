@@ -4,6 +4,9 @@
     ViewBag.Title = "Registrede medlemmer";
 }
 
+@using (Html.BeginForm("Detaljer", "RegisteredMembers", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
 <div>
     <hr />
     <table class="table table-dark table-striped table-hover">
@@ -12,9 +15,9 @@
                 <th>@Html.DisplayNameFor(model => model.FirstName)</th>
                 <th>@Html.DisplayNameFor(model => model.LastName)</th>
                 <th>@Html.DisplayNameFor(model => model.BirthDate)</th>
-                <th>@Html.DisplayNameFor(model => model.CreationDate)</th>
+                <th>@Html.DisplayNameFor(model => model.DateCreate)</th>
                 <th>@Html.DisplayNameFor(model => model.Age)</th>
-                <th>@Html.DisplayNameFor(model => model.SportType)</th>
+                <th>@Html.DisplayNameFor(model => model.SportTypes)</th>
             </tr>
 
             @foreach (var item in Model)
@@ -23,16 +26,21 @@
                     <td>@Html.DisplayFor(m => item.FirstName)</td>
                     <td>@Html.DisplayFor(m => item.LastName)</td>
                     <td>@Html.DisplayFor(m => item.BirthDate)</td>
-                    <td>@Html.DisplayFor(m => item.CreationDate)</td>
+                    <td>@Html.DisplayFor(m => item.DateCreate)</td>
                     <td>@Html.DisplayFor(m => item.Age)</td>
-                    <td>@Html.DisplayFor(m => item.SportType)</td>
+                    <td>@Html.DisplayFor(m => item.SportTypes)</td>
+                    <td>
+                        @Html.ActionLink("Rediger", "EditMember", new { item.MemberID }) |
+                        @Html.ActionLink("Detaljer", "MemberDetails", new { item.MemberID }) |
+                        @Html.ActionLink("Slet", "DeleteMember", new { item.MemberID })
+                    </td>
                 </tr>
             }
         </thead>
     </table>
     
 </div>
-
+}
 <div>
     @Html.ActionLink("Tilføj medlem", "AddMember")
 </div>
