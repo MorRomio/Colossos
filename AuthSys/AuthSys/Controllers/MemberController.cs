@@ -13,6 +13,24 @@ namespace AuthSys.Controllers
     {
         private ColossosContext DBContext = new ColossosContext();
 
+
+        public ActionResult SearchMembers(string searchString)
+        {
+            ViewBag.Message = "";
+
+            if(String.IsNullOrEmpty(searchString))
+            {
+                ViewBag.Message = "Du skal angive en værdi";
+                ViewBag.TextColor = "red";
+                
+                //return View("RegisteredMembers");
+            }
+
+            var members = DBContext.Members.Where(m => m.FirstName.Contains(searchString) || m.LastName.Contains(searchString));
+
+            return View("RegisteredMembers", members);
+        }
+
         [HttpPost]
         [ValidateAntiForgeryToken] //Prevent cross-site request forgery
         public ActionResult AddMember(MemberViewModel model)

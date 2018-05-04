@@ -52,3 +52,4 @@ C:\git\colossos\AuthSys\AuthSys\bin\Microsoft.Owin.Security.Twitter.xml
 C:\git\colossos\AuthSys\AuthSys\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\git\colossos\AuthSys\AuthSys\obj\Debug\AuthSys.dll
 C:\git\colossos\AuthSys\AuthSys\obj\Debug\AuthSys.pdb
+C:\git\Colossos\AuthSys\AuthSys\obj\Debug\AuthSys.csprojResolveAssemblyReference.cache

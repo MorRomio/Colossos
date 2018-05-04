@@ -22,7 +22,6 @@ namespace AuthSys.Models
         public string LastName { get; set; }
 
         [Display(Name="Fødselsdato")]        
-        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime BirthDate { get; set; }
 
         [Display(Name="Medlem siden")]      
