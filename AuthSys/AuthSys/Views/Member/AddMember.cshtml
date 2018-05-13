@@ -4,15 +4,29 @@
     ViewBag.Title = "Nyt medlem";
 }
 
+<script>
+    $(document).ready(function () {
+        //Add handlers to the buttons working with webcam
+        initTriggers();
+    });    
+</script>
 <h2>Tilføj medlem</h2>
 
+<div class="memberPhoto">
+    <video id="video" width="250" height="150" autoplay style="float: left; visibility: hidden;"></video>
+    <canvas id="canvas" width="250" height="150" style="float: right; background-color: springgreen;"></canvas>
+    <br /> 
+    <button id="activateCamButton" value="1">Aktiver kamera</button>
+    <button id="shoot">Tag billed</button>    
+    <button id="checkCam">Deaktiver kamera</button>
+</div>
 
 @using (Html.BeginForm()) 
 {
-    @Html.AntiForgeryToken()
-    
-    <div class="form-horizontal">
-        <h4>Member</h4>
+    @Html.AntiForgeryToken()    
+
+    <div class="form-horizontal">        
+        <br /><br /><br /><br /><br /><br /><br /><br />
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -44,6 +58,30 @@
             @Html.LabelFor(model => model.Age, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
                 @Html.TextBoxFor(model => model.Age, new { @readonly = "readonly", @class = "form-control AddMemberControls", maxlength = "3", @placeholder = "Alder udfyldes automatisk" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.Address, new { htmlAttributes = new { @class = "form-control AddMemberControls", maxlength = "50", size = "50" } })
+                @Html.ValidationMessageFor(model => model.Address, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.ZipCode, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.ZipCode, new { htmlAttributes = new { @class = "form-control AddMemberControls", maxlength = "4", size = "50" } })
+                @Html.ValidationMessageFor(model => model.ZipCode, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.City, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.City, new { htmlAttributes = new { @class = "form-control AddMemberControls", maxlength = "50", size = "50" } })
+                @Html.ValidationMessageFor(model => model.City, "", new { @class = "text-danger" })
             </div>
         </div>
 

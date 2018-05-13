@@ -6,8 +6,8 @@
 
 .memberPhoto {
     float: right;
-    width: 90px;
-    height: 80px;
+    width: 500px;
+    height: 150px;
     background-color: orange;
-    margin-right: 300px;    
+    margin-right: 400px;    
 }

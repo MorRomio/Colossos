@@ -45,6 +45,9 @@ namespace AuthSys.Controllers
             {
                 FirstName = model.FirstName,
                 LastName = model.LastName,
+                Address = model.Address,
+                ZipCode = model.ZipCode,
+                City = model.City,
                 Age = memberAge,
                 BirthDate = model.BirthDate,
                 SportTypes = model.SportTypes,
@@ -114,6 +117,9 @@ namespace AuthSys.Controllers
                 member.MemberID = model.MemberID;
                 member.FirstName = model.FirstName;
                 member.LastName = model.LastName;
+                member.Address = model.Address;
+                member.ZipCode = model.ZipCode;
+                member.City = model.City;
                 member.BirthDate = model.BirthDate;
                 member.SportTypes = model.SportTypes;
                 member.Age = memberAge;

@@ -19,10 +19,19 @@ namespace AuthSys.Models
         public string FirstName { get; set; }
 
         [Display(Name="Efternavn")]
-        public string LastName { get; set; }
+        public string LastName { get; set; }        
 
-        [Display(Name="Fødselsdato")]        
+        [Display(Name="Fødselsdato")]
         public DateTime BirthDate { get; set; }
+
+        [Display(Name="Adresse")]
+        public string Address { get; set; }
+
+        [Display(Name="Postnummer")]
+        public int ZipCode { get; set; }
+
+        [Display(Name="By")]
+        public string City { get; set; }
 
         [Display(Name="Medlem siden")]      
         public DateTime DateCreate { get; set; }
