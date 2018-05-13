@@ -6,7 +6,7 @@ function activateCam() {
     var butVal = document.getElementById("activateCamButton").value;
     
     //If val is 1, then we want activate cam, and if 2, then disable
-    if (butVal == 1) {
+    if (butVal == "Aktiver kamera") {
         video.style.visibility = "visible";
 
         // Get access to the camera!
@@ -15,10 +15,23 @@ function activateCam() {
             navigator.mediaDevices.getUserMedia({ video: true }).then(function (stream) {
                 video.srcObject = stream;
                 video.play();
+
+                butVal.value = "Deaktiver kamera";
+
+                document.getElementById("activateCamButton").addEventListener("click", function () {
+                    activateCam();
+                });
+            });
+        }        
+    } else {
+        if(butVal === "Deaktiver kamera") {
+            butVal = "Aktiver kamera";
+            butVal.id = "disableCam";
+
+            document.getElementById("disableCam").addEventListener("click", function () {
+                disableCam();
             });
         }
-    } else {
-
     }
 
     
@@ -34,7 +47,7 @@ function initTriggers() {
         takeSnapAndSaveUrl();
     }); 
 
-    document.getElementById("checkCam").addEventListener("click", function () {
+    document.getElementById("disableCam").addEventListener("click", function () {
         disableCam();
     });
 }
