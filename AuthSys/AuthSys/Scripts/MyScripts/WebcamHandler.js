@@ -2,11 +2,8 @@
 function activateCam() {
     // Grab elements, create settings, etc.
     var video = document.getElementById('video');
-
-    var butVal = document.getElementById("activateCamButton").value;
     
     //If val is 1, then we want activate cam, and if 2, then disable
-    if (butVal == "Aktiver kamera") {
         video.style.visibility = "visible";
 
         // Get access to the camera!
@@ -22,19 +19,7 @@ function activateCam() {
                     activateCam();
                 });
             });
-        }        
-    } else {
-        if(butVal === "Deaktiver kamera") {
-            butVal = "Aktiver kamera";
-            butVal.id = "disableCam";
-
-            document.getElementById("disableCam").addEventListener("click", function () {
-                disableCam();
-            });
-        }
-    }
-
-    
+        }            
 }
 
 function initTriggers() {
@@ -77,3 +62,28 @@ function disableCam() {
 
     video.srcObject.getVideoTracks().forEach(track => track.stop());
 }
+
+function sendImageUrl(MemberID, action, controller) {
+    var url = '/' + action + '/' + controller;
+
+    $.ajax({
+        url: url,
+        data: $("form").serialize(),
+        contentType: 'application/html; charset=utf-8',
+        dataType: "html",
+        success: function(msg) {
+            alert("Success");
+        },
+        error: function(msg) {
+            alert("Error");
+        }
+    })
+}
+
+
+
+
+
+
+
+

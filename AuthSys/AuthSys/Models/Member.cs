@@ -36,6 +36,9 @@ namespace AuthSys.Models
         [Display(Name="Medlem siden")]      
         public DateTime DateCreate { get; set; }
 
+       // [Display(Name ="Udløbsdato af medlemskab")]
+       // public DateTime ExpirationOfMembership { get; set; }
+
         [Display(Name = "Alder")]
         public int Age { get; set; }
 
@@ -48,7 +51,7 @@ namespace AuthSys.Models
         public string imageReference { get; set; }
 
         //Type ICollection allows entries to be added, deleted and updated
-        public virtual ICollection<Card> cards { get; set; }  //Making a relation to the Card table
+        public Card Card { get; set; }  //Making a relation to the Card table
         
     }
 }

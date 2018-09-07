@@ -22,7 +22,7 @@ namespace AuthSys.DataAccessLayer
             var members = new List<Member> 
             {
                 new Member { FirstName = "MagiQ", LastName = "Pjat", Address = "Bum street", ZipCode = 8334, City = "Bum city",  DateCreate = firstRec, BirthDate = firstRec, Age = (int) Math.Truncate(firstAge/365) },
-                new Member { FirstName = "Elmer", LastName = "Fjot", Address = "Street cred", ZipCode = 4322, City = "Rich city", DateCreate = secRec, BirthDate = secRec, Age = (int) Math.Truncate(secAge/365) }
+                new Member { FirstName = "Elmer", LastName = "Fjot", Address = "Street cred", ZipCode = 4322, City = "Rich city", DateCreate = secRec, BirthDate = secRec, Age = (int) Math.Truncate(secAge/365), }
             };
  
             members.ForEach(s => context.Members.Add(s));

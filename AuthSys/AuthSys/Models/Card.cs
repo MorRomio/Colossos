@@ -9,6 +9,8 @@ namespace AuthSys.Models
     {
         public int CardID { get; set; }
 
+        public int MemberID { get; set; }
+
         public DateTime CreationDate { get; set; }
     }
 }

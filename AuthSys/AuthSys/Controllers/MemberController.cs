@@ -1,5 +1,6 @@
 ﻿using AuthSys.DataAccessLayer;
 using AuthSys.Models;
+using AuthSys.Helpers;
 using System.Collections.Generic;
 using System.Web.Mvc;
 using AuthSys.ViewModels;
@@ -180,5 +181,35 @@ namespace AuthSys.Controllers
 
             return View(member);
         }
+
+        public ActionResult AttachCard()
+        {
+            return View("AttachCard");  
+        }
+
+        [HttpPost]
+        public ActionResult AttachCard(int cardID, Member model)
+        {
+            if(MagnetEvent.ProcessCard(cardID))
+            {
+                Card card = new Card
+                {
+                    CardID = cardID,
+                    CreationDate = DateTime.Today,
+                    MemberID = model.MemberID
+                };
+
+                DBContext.Cards.Add(card);
+
+                var member = DBContext.Members.Find(model.MemberID);
+                member.Card = card;
+
+                DBContext.SaveChanges();
+
+                return View("AttachCard");
+            }
+
+            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+        }        
     }
 }
