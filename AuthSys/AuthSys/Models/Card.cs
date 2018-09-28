@@ -7,10 +7,11 @@ namespace AuthSys.Models
 {
     public class Card
     {
-        public int CardID { get; set; }
+        public string CardID { get; set; }
 
         public int MemberID { get; set; }
 
-        public DateTime CreationDate { get; set; }
+        public DateTime CreationDate { get; set; } 
     }
 }
+

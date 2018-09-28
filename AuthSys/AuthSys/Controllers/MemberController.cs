@@ -7,13 +7,14 @@ using AuthSys.ViewModels;
 using System;
 using System.Net;
 using System.Linq;
+using System.Web.UI.WebControls;
 
 namespace AuthSys.Controllers
 {
     public class MemberController : Controller
     {
         private ColossosContext DBContext = new ColossosContext();
-
+        private TextBox tBox = new TextBox();        
 
         public ActionResult SearchMembers(string searchString)
         {
@@ -101,12 +102,14 @@ namespace AuthSys.Controllers
         [ValidateAntiForgeryToken] //Prevent cross-site request forgery
         public ActionResult EditMember(Member model)
         {
-            Member members = new Member();
             var member = DBContext.Members.Find(model.MemberID);
 
             DateTime today = DateTime.Now;
             double days = today.Subtract(model.BirthDate).TotalDays;
             int memberAge = (int)Math.Truncate(days / 365);
+
+            
+            var thisMembersCard = DBContext.Cards.SingleOrDefault(x => x.MemberID == model.MemberID);
 
             if (member == null)
             {
@@ -124,6 +127,13 @@ namespace AuthSys.Controllers
                 member.BirthDate = model.BirthDate;
                 member.SportTypes = model.SportTypes;
                 member.Age = memberAge;
+
+                if(!string.IsNullOrEmpty(model.AssociatedCard))
+                {
+                    member.AssociatedCard = model.AssociatedCard;
+                    thisMembersCard.CreationDate = DateTime.Today;
+                }
+                
                             
                 DBContext.SaveChanges();
 
@@ -182,34 +192,46 @@ namespace AuthSys.Controllers
             return View(member);
         }
 
-        public ActionResult AttachCard()
+        public ActionResult AttachCard(int MemberID)
         {
-            return View("AttachCard");  
+            var member = DBContext.Members.Find(MemberID);
+
+            CardAndMemberViewModel viewModel = new CardAndMemberViewModel()
+            {
+                FirstName = member.FirstName,
+                LastName = member.LastName
+            };
+
+            return View(viewModel);  
         }
 
         [HttpPost]
-        public ActionResult AttachCard(int cardID, Member model)
+        public ActionResult AttachCard(Card model, int MemberID)
         {
-            if(MagnetEvent.ProcessCard(cardID))
+            var card = new Card()
             {
-                Card card = new Card
-                {
-                    CardID = cardID,
-                    CreationDate = DateTime.Today,
-                    MemberID = model.MemberID
-                };
+                MemberID = MemberID,
+                CreationDate = DateTime.Today,
+                CardID = model.CardID
+            };
 
-                DBContext.Cards.Add(card);
+            var member = DBContext.Members.Find(MemberID);
 
-                var member = DBContext.Members.Find(model.MemberID);
+            if(ModelState.IsValid)
+            {
+                member.AssociatedCard = model.CardID;
+                card.MemberID = MemberID;
+                card.CardID = model.CardID;
                 member.Card = card;
 
+                DBContext.Cards.Add(card);    
                 DBContext.SaveChanges();
 
-                return View("AttachCard");
+                ViewBag.TextColor = "Green";
+                ViewBag.Message = "Kort tilføjet";
             }
 
-            return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-        }        
+            return View();                   
+        }                
     }
 }

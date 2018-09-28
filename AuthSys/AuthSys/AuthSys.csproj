@@ -188,6 +188,7 @@
     <Compile Include="Models\Tansactions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\CardAndMemberViewModel.cs" />
     <Compile Include="ViewModels\MemberDetailsViewModel.cs" />
     <Compile Include="ViewModels\EditMemberViewModel.cs" />
     <Compile Include="ViewModels\MemberViewModel.cs" />
@@ -211,6 +212,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\MyScripts\Buttons.js" />
     <Content Include="Scripts\MyScripts\confirmations.js" />
     <Content Include="Scripts\MyScripts\WebcamHandler.js" />
     <Content Include="Scripts\respond.js" />

@@ -95,16 +95,17 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Opret" class="btn btn-default" />
+                <input type="submit" value="Opret" class="btn btn-default"  />
             </div>
         </div>
     </div>
 }
+
 <p style="color: @ViewBag.TextColor; font-size: 22px;">@ViewBag.Message</p>
 
 <div>
     @Html.ActionLink("Registrerede medlemmer", "RegisteredMembers")
 </div>
-<div style="display: none" id="confirmBox">
-    <p>Medlem tilføjet</p>
-</div>
+
+<div id="testDiv" title="Huni" style="display: none">Det virker!!!</div>
+<input type="button" value="Test dialog" onclick="showDialog('testDiv')" />

@@ -45,13 +45,10 @@ namespace AuthSys.Models
         [Display(Name="Sportsgren")]
         public string SportTypes { get; set; }
 
-        [Display(Name="Tilføj kort")]
-        public bool AddCard { get; set; }
-
         public string imageReference { get; set; }
 
         //Type ICollection allows entries to be added, deleted and updated
-        public Card Card { get; set; }  //Making a relation to the Card table
+        public virtual Card Card { get; set; }  //Making a relation to the Card table
         
     }
 }
