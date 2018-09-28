@@ -1,30 +1,35 @@
 ﻿
 $(document).ready(function () {
-    //alert("Testing");
+    //Tell JQuery not to conflict with older versions of libs
     $.noConflict();
-    $("#addCardBox").css("display", "none");
-    $("#addCardLabel").css("display", "none");
 
-    $("#addCard").click(function () {
-        //alert("Test");
+    //$("#addCardBox").css("display", "none");
+    //$("#addCardLabel").css("display", "none");
 
-        $("#addCardBox").css("display", "block");
-        $("#addCardLabel").css("display", "block");
-    });
     
 });
 
-function test() {
-    alert("It works");
+function removeCard() {
+    alert("Er du sikker på at du vil slette det tilknyttet kort?");
 }
 
-function cardAttached() {
-    //alert("Called");
-   
-    $(function () {
-   //     $("#msgDiv").dialog();
+function alternateDialog(componentID) {
+
+    $("#" + componentID).dialog({
+        show: {
+            effect: 'bounce',
+            duration: 500
+        },
+        hide: {
+            effect: 'clip',
+            duration: 500
+        },
+        buttons: {
+            OK: function () {
+                $(this).dialog('close');
+            }
+        }
     });
-    
 }
 
 function showDialog(componentID) {
@@ -37,6 +42,16 @@ function showDialog(componentID) {
         hide: {
             effect: 'fade',
             duration: 500
-        }
+        },
+        buttons: {
+            Ja: function () {
+                $("#cardStatus").val("Kort fjernes");
+                $(this).dialog('close');
+                alternateDialog('confirmationDiv');
+            },
+            Nej: function () {
+                $(this).dialog('close');
+            }
+        }   
     });
 }

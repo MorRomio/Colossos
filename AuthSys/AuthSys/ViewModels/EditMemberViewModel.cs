@@ -19,6 +19,8 @@ namespace AuthSys.ViewModels
 
         public string SportType { get; set; }
 
+        public string HasCard { get; set; }
+
         //public string CreationDate { get; set; }
     }
 }

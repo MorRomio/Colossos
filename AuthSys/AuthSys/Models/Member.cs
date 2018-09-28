@@ -45,6 +45,9 @@ namespace AuthSys.Models
         [Display(Name="Sportsgren")]
         public string SportTypes { get; set; }
 
+        [Display(Name ="Har kort?")]
+        public string HasCard { get; set; }
+
         public string imageReference { get; set; }
 
         //Type ICollection allows entries to be added, deleted and updated

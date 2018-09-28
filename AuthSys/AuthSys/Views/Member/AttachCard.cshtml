@@ -6,6 +6,14 @@
 }
 <script src="~/Scripts/MyScripts/Buttons.js"></script>
 
+<script>
+    $(document).ready(function () {
+        $("#cardBox").focus();
+        alert("Done");        
+    });
+
+</script>
+
 <h2>Tilknyt kort</h2>
 
 @using (Html.BeginForm()) 
@@ -35,21 +43,21 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CardID, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CardID, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.CardID, new { htmlAttributes = new { @class = "form-control", @id="cardBox" } })
                 @Html.ValidationMessageFor(model => model.CardID, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Tilføj" class="btn btn-default" onclick="cardAttached();"/>
+                <input type="submit" value="Tilføj" class="btn btn-default" id="submitBut"/>
             </div>
         </div>
     </div>
 }
-<div id="msgDiv" style="display: none;" title="Handling udført">
-    <p style="color: @ViewBag.TextColor; font-size: 22px;">@ViewBag.Message</p>
-</div>
+ 
+<p style="color: @ViewBag.TextColor; font-size: 22px;">@ViewBag.Message</p>
+
 <div>
     @Html.ActionLink("Registrerede medlemmer", "RegisteredMembers")
 </div>

@@ -8,6 +8,8 @@ using System;
 using System.Net;
 using System.Linq;
 using System.Web.UI.WebControls;
+using System.Data.Entity.Infrastructure;
+using System.Data.Entity.Validation;
 
 namespace AuthSys.Controllers
 {
@@ -95,6 +97,15 @@ namespace AuthSys.Controllers
             Member members = new Member();
             var member = DBContext.Members.Find(model.MemberID);
 
+            if (!string.IsNullOrEmpty(member.HasCard))
+            {
+                ViewBag.CardAttached = "Ja";
+            }
+            else
+            {
+                ViewBag.CardAttached = "Nej";
+            }   
+
             return View(member);
         }
 
@@ -132,6 +143,7 @@ namespace AuthSys.Controllers
                 {
                     member.AssociatedCard = model.AssociatedCard;
                     thisMembersCard.CreationDate = DateTime.Today;
+                    member.HasCard = (model.HasCard.Equals("Ja") ? model.HasCard: "Nej");
                 }
                 
                             
@@ -223,12 +235,28 @@ namespace AuthSys.Controllers
                 card.MemberID = MemberID;
                 card.CardID = model.CardID;
                 member.Card = card;
+                member.HasCard = "Ja";
 
-                DBContext.Cards.Add(card);    
-                DBContext.SaveChanges();
+                try
+                {
+                    DBContext.Cards.Add(card);
+                    DBContext.SaveChanges();
 
-                ViewBag.TextColor = "Green";
-                ViewBag.Message = "Kort tilføjet";
+                    ViewBag.TextColor = "Green";
+                    ViewBag.Message = "Kort tilføjet";
+
+                } catch(DbUpdateException dbe)
+                {
+                    //Vis dialog 
+                    ViewBag.TextColor = "Red";
+                    ViewBag.Message = "Update exception";
+
+                } catch(DbEntityValidationException dde)
+                {
+                    ViewBag.TextColor = "Red";
+                    ViewBag.Message = "Validation exception exception";
+                }
+                
             }
 
             return View();                   
