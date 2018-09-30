@@ -10,13 +10,15 @@ using System.Linq;
 using System.Web.UI.WebControls;
 using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
+using Microsoft.AspNet.SignalR;
+using AuthSys.SignalRhub;
 
 namespace AuthSys.Controllers
 {
     public class MemberController : Controller
     {
         private ColossosContext DBContext = new ColossosContext();
-        private TextBox tBox = new TextBox();        
+        private HubSignalR signalR = new HubSignalR();       
 
         public ActionResult SearchMembers(string searchString)
         {
@@ -97,16 +99,21 @@ namespace AuthSys.Controllers
             Member members = new Member();
             var member = DBContext.Members.Find(model.MemberID);
 
-            if (!string.IsNullOrEmpty(member.HasCard))
+            if (member.HasCard.Equals("Nej"))
             {
-                ViewBag.CardAttached = "Ja";
+                ViewBag.CardAttached = "Nej";
             }
             else
             {
-                ViewBag.CardAttached = "Nej";
+                ViewBag.CardAttached = "Ja";
             }   
 
             return View(member);
+        }
+
+        public void UseSignalRToNotifyClients(string msg)
+        {
+            GlobalHost.ConnectionManager.GetHubContext<HubSignalR>().Clients.All.addMessageToPage(msg);
         }
 
         [HttpPost]
@@ -144,8 +151,21 @@ namespace AuthSys.Controllers
                     member.AssociatedCard = model.AssociatedCard;
                     thisMembersCard.CreationDate = DateTime.Today;
                     member.HasCard = (model.HasCard.Equals("Ja") ? model.HasCard: "Nej");
-                }
-                
+
+                    //We have asked to remove card from user
+                    if (!member.HasCard.Equals("Ja") && thisMembersCard != null)
+                    {
+                        DBContext.Cards.Remove(thisMembersCard);
+                        member.AssociatedCard = null;
+                        member.Card = null;
+
+                        ViewBag.CardAttached = "Nej";
+                    }
+                    else
+                    {
+                        ViewBag.CardAttached ="Ja";
+                    }
+                }                
                             
                 DBContext.SaveChanges();
 
@@ -245,16 +265,20 @@ namespace AuthSys.Controllers
                     ViewBag.TextColor = "Green";
                     ViewBag.Message = "Kort tilføjet";
 
+                    signalR.CardAdded();
+
                 } catch(DbUpdateException dbe)
                 {
                     //Vis dialog 
+                    signalR.CardAdded();
                     ViewBag.TextColor = "Red";
-                    ViewBag.Message = "Update exception";
+                    ViewBag.Message = "Kort eksisterer allerede. Slet det først";
 
                 } catch(DbEntityValidationException dde)
                 {
                     ViewBag.TextColor = "Red";
-                    ViewBag.Message = "Validation exception exception";
+                    ViewBag.Message = "Validation exception (No card was typed in)";
+                    signalR.CardAdded();
                 }
                 
             }

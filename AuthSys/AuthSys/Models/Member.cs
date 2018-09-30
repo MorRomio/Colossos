@@ -52,6 +52,11 @@ namespace AuthSys.Models
 
         //Type ICollection allows entries to be added, deleted and updated
         public virtual Card Card { get; set; }  //Making a relation to the Card table
+
+        public Member()
+        {
+            HasCard = "Nej";
+        }
         
     }
 }

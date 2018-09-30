@@ -9,12 +9,8 @@ $(document).ready(function () {
     
 });
 
-function removeCard() {
-    alert("Er du sikker på at du vil slette det tilknyttet kort?");
-}
 
 function alternateDialog(componentID) {
-
     $("#" + componentID).dialog({
         show: {
             effect: 'bounce',
@@ -48,6 +44,7 @@ function showDialog(componentID) {
                 $("#cardStatus").val("Kort fjernes");
                 $(this).dialog('close');
                 alternateDialog('confirmationDiv');
+                $("#fjernKortKnap").css("display", "none");
             },
             Nej: function () {
                 $(this).dialog('close');

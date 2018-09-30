@@ -13,17 +13,20 @@
 
 <script>
     $(function () {
-
         // Reference the auto-generated proxy for the hub.
-        var con = $.connection.HubSignalR;
+        var signalRhub = $.connection.hubSignalR;
 
-        con.client.AddMessageToPage = function (componentID) {
-            $("#" + componentID).showDialog();
+        //Client function that will be called by the server, when there is a notification
+        signalRhub.client.TestMessages = function (msgFromServer) {
+            console.log("From server: " + msgFromServer);
         };
 
         //Start connection
-        $.connection.hub.start().done(function () {
-            alert("Begun");
+        $.connection.hub.start().done(function () {            
+            $("#knap").click(function () {
+                //Call the method on the server
+                signalRhub.server.test();                
+            }); 
         });
     });
 </script>
@@ -125,5 +128,5 @@
     @Html.ActionLink("Registrerede medlemmer", "RegisteredMembers")
 </div>
 
-<div id="testDiv" title="Huni" style="display: none">Det virker!!!</div>
-<input type="button" value="Test dialog" onclick="showDialog('testDiv')" />
+<div id="testDiv" title="Huni" style="display: none">gfgfddfg</div>
+<input type="button" id="knap" value="Test dialog" />
