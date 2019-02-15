@@ -13,8 +13,6 @@ function activateCam() {
                 video.srcObject = stream;
                 video.play();
 
-                butVal.value = "Deaktiver kamera";
-
                 document.getElementById("activateCamButton").addEventListener("click", function () {
                     activateCam();
                 });
@@ -49,18 +47,16 @@ function takeSnapAndSaveUrl() {
 
     context.drawImage(video, 0, 0, cancasWidth, canvasHeight);
 
-    imageURL = canvas.toDataURL();
-}
-
-function isCamAlreadyActive() {
-
+    imageURL = canvas.toDataURL(); console.log("URL: " + imageURL);
 }
 
 function disableCam() {
     var video = document.getElementById('video');
     video.style.visibility = "hidden";
 
-    video.srcObject.getVideoTracks().forEach(track => track.stop());
+    if (video.srcObject != null) {
+        video.srcObject.getVideoTracks().forEach(track => track.stop());
+    }
 }
 
 function sendImageUrl(MemberID, action, controller) {

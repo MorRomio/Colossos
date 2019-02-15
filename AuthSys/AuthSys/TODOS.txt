@@ -1,0 +1,5 @@
+﻿
+- Kamera
+- Permissions
+- Print
+- Datobug under edit member
