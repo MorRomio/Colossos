@@ -1,5 +1,9 @@
 ﻿
+- Roles
+- Login page
+- Demand strong password
 - Kamera
 - Permissions
 - Print
 - Datobug under edit member
+- Super admin page and admin page

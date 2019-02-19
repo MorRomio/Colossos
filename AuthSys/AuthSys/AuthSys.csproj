@@ -172,6 +172,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\CardController.cs" />
     <Compile Include="Controllers\ErrorLoginController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -186,6 +187,7 @@
     <Compile Include="Helpers\MagnetEvent.cs" />
     <Compile Include="Helpers\WebCamHandler.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\Admin.cs" />
     <Compile Include="Models\Card.cs" />
     <Compile Include="Models\ErrorLogin.cs" />
     <Compile Include="Models\IdentityModels.cs" />
@@ -195,6 +197,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SignalRhub\HubSignalR.cs" />
     <Compile Include="Startup.cs" />
+    <Compile Include="ViewModels\AdminViewModel.cs" />
     <Compile Include="ViewModels\CardAndMemberViewModel.cs" />
     <Compile Include="ViewModels\MemberDetailsViewModel.cs" />
     <Compile Include="ViewModels\EditMemberViewModel.cs" />
@@ -270,9 +273,11 @@
     <Content Include="Views\Member\DeleteMember.cshtml" />
     <Content Include="Views\Member\MemberDetails.cshtml" />
     <Content Include="Views\Member\AttachCard.cshtml" />
+    <Content Include="Views\Member\Admin.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Views\Admin\" />
     <Folder Include="Views\Transactions\" />
   </ItemGroup>
   <ItemGroup>
