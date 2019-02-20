@@ -1,0 +1,94 @@
+﻿
+@{
+    ViewBag.Title = "AddAdmin";
+}
+
+<h2>AddAdmin</h2>
+
+@model AuthSys.Models.Admin
+
+<script>
+    $(document).ready(function () {
+        //Add handlers to the buttons working with webcam
+        initTriggers();
+    });
+</script>
+
+<script>
+    $(function () {
+        // Reference the auto-generated proxy for the hub.
+        var signalRhub = $.connection.hubSignalR;
+
+        //Client function that will be called by the server, when there is a notification
+        signalRhub.client.TestMessages = function (msgFromServer) {
+            console.log("From server: " + msgFromServer);
+        };
+
+        //Start connection
+        $.connection.hub.start().done(function () {
+            $("#knap").click(function () {
+                //Call the method on the server
+                signalRhub.server.test();
+            });
+        });
+    });
+</script>
+
+<h2>Tilføj medlem</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <br /><br /><br /><br /><br /><br /><br /><br />
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control AddMemberControls", maxlength = "50", size = "50" } })
+                @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control AddMemberControls", maxlength = "50", size = "50" } })
+                @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.MemberEmail, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.EditorFor(model => model.MemberEmail, new { @class = "form-control AddMemberControls", maxlength = "50", size = "50" })
+                @Html.ValidationMessageFor(model => model.MemberEmail, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Roles, htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-md-10">
+                @Html.DropDownListFor(model => model.Roles, new SelectList(Model.Roles, "RoleID", "RoleName"), new { @class = "form-control AddMemberControls", maxlength = "50", size = "50" }) 
+            </div>
+        </div>
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-md-10">
+                <input type="submit" value="Opret" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+
+<p style="color: @ViewBag.TextColor; font-size: 22px;">@ViewBag.Message</p>
+
+<div>
+    @Html.ActionLink("Registrerede medlemmer", "RegisteredMembers")
+</div>
+
+<div id="testDiv" title="Huni" style="display: none">gfgfddfg</div>
+<input type="button" id="knap" value="Test dialog" />

@@ -13,7 +13,7 @@ namespace AuthSys.DataAccessLayer
         //Create a DbSet property for each entity set (Database table)
         public DbSet<Card> Cards { get; set; }
         public DbSet<Member> Members { get; set; }
-
+        public DbSet<Roles> Roles { get; set; }
 
         //Specify the connection string
         public ColossosContext() : base("ColosseumContext")

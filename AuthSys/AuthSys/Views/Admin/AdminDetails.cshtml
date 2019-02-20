@@ -1,0 +1,43 @@
+﻿@model IEnumerable<AuthSys.ViewModels.AdminViewModel>
+
+@{
+    ViewBag.Title = "Admin";
+}
+
+<h2>Admin</h2>
+
+@using (Html.BeginForm("Detaljer", "RegisteredMembers", FormMethod.Get))
+{
+    @Html.AntiForgeryToken()
+    <div>
+        <hr />
+        <table class="table table-dark table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>@Html.DisplayNameFor(model => model.FirstName)</th>
+                    <th>@Html.DisplayNameFor(model => model.LastName)</th>
+                    <th>@Html.DisplayNameFor(model => model.MemberEmail)</th>
+                    <th>@Html.DisplayNameFor(model => model.Role)</th>                    
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>@Html.DisplayFor(m => item.FirstName)</td>
+                        <td>@Html.DisplayFor(m => item.LastName)</td>
+                        <td>@Html.DisplayFor(m => item.MemberEmail)</td>
+                        <td>@Html.DisplayFor(m => item.Role)</td>              
+                        <td>
+                            @Html.ActionLink("Rediger", "EditAdmin", new { item.MemberID }) |                            
+                            @Html.ActionLink("Slet", "DeleteAdmin", new { item.MemberID })
+                        </td>
+                    </tr>
+                }
+            </thead>
+        </table>
+
+    </div>
+}
+<div>
+    @Html.ActionLink("Tilføj medlem", "AddMember")
+</div>
