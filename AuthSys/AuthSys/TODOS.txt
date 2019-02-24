@@ -7,3 +7,4 @@
 - Print
 - Datobug under edit member
 - Super admin page and admin page
+- Email validation

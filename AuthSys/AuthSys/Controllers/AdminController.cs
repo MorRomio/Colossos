@@ -13,14 +13,20 @@ namespace AuthSys.Controllers
         [HttpGet]
         public ActionResult AddAdmin()
         {
-      /*      DataAccessLayer.ColossosContext col = new DataAccessLayer.ColossosContext();
+            DataAccessLayer.ColossosContext col = new DataAccessLayer.ColossosContext();
 
             List<Roles> list = new List<Roles>(col.Roles.ToList());
+            AdminViewModel viewMod = new AdminViewModel();                         
 
-            var model = new RolesViewModel();
-            model.list = new SelectList(list, "RolesID", "RoleName"); */
+            //viewMod.Roles = new SelectList(list);
+
+            viewMod.Roles = col.Roles.ToList().Select(x => new SelectListItem()
+            {
+                 Value = x.RoleName,
+                 Text = x.RoleDescription
+            }).ToList();
             
-            return View("AddAdmin");
+            return View(viewMod);
         }
 
         [HttpPost]
