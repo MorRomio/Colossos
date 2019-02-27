@@ -18,6 +18,8 @@ namespace AuthSys.Models
 
         public string Password { get; set; }
 
+        public string RoleName { get; set; }
+
         public IEnumerable<SelectListItem> Roles { get; set; }
     }
 }

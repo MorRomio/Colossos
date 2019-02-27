@@ -32,6 +32,17 @@ namespace AuthSys.Controllers
         [HttpPost]
         public ActionResult AddAdmin(AdminViewModel model)
         {
+            if(ModelState.IsValid) 
+            {
+                var admin = new Admin()
+                {
+                    FirstName = model.FirstName,
+                    LastName = model.LastName,
+                    MemberEmail = model.MemberEmail
+                    //RoleName = model.Roles.Va
+                };
+            }
+            
             return View("AddAdmin");
         }
 
