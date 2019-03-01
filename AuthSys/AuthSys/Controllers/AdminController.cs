@@ -32,6 +32,8 @@ namespace AuthSys.Controllers
         [HttpPost]
         public ActionResult AddAdmin(AdminViewModel model)
         {
+            //var selectedVal = new SelectList(model.Roles);
+
             if(ModelState.IsValid) 
             {
                 var admin = new Admin()
@@ -39,11 +41,13 @@ namespace AuthSys.Controllers
                     FirstName = model.FirstName,
                     LastName = model.LastName,
                     MemberEmail = model.MemberEmail
-                    //RoleName = model.Roles.Va
+                   // RoleName = selectedVal.DataTextField
                 };
+
+                return View(admin);
             }
-            
-            return View("AddAdmin");
+
+            return null;
         }
 
         [HttpGet]

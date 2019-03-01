@@ -11,8 +11,10 @@ namespace AuthSys.Models
         [Key]
         public int RoleID { get; set; }
 
+        [Display(Name = "Rolle")]
         public string RoleName { get; set; }
 
+        [Display(Name = "Beskrivelse")]
         public string RoleDescription { get; set; }
     }
 }

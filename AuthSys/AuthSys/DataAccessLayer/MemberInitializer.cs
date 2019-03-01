@@ -27,6 +27,16 @@ namespace AuthSys.DataAccessLayer
  
             members.ForEach(s => context.Members.Add(s));
             context.SaveChanges();
+
+            var roles = new List<Roles>
+            {
+                new Roles {RoleID = 1, RoleName = "Normal user", RoleDescription = "Can do little" },
+                new Roles {RoleID = 2, RoleName = "Admin", RoleDescription = "Can do more than normal user" },
+                new Roles {RoleID = 3, RoleName = "Super Admin", RoleDescription = "Can do it all" }
+            };
+
+            roles.ForEach(x => context.Roles.Add(x));
+            context.SaveChanges();
         }
     }
 }
