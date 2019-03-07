@@ -5,11 +5,15 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using AuthSys.ViewModels;
+using System.Data.Entity;
+using AuthSys.DataAccessLayer;
 
 namespace AuthSys.Controllers
 {
     public class AdminController : Controller
-    {        
+    {
+        private ColossosContext DBContext = new ColossosContext();
+
         [HttpGet]
         public ActionResult AddAdmin()
         {
@@ -23,7 +27,7 @@ namespace AuthSys.Controllers
             viewMod.Roles = col.Roles.ToList().Select(x => new SelectListItem()
             {
                  Value = x.RoleName,
-                 Text = x.RoleDescription
+                 Text = "Vælg en rolle..."
             }).ToList();
             
             return View(viewMod);
@@ -33,21 +37,23 @@ namespace AuthSys.Controllers
         public ActionResult AddAdmin(AdminViewModel model)
         {
             //var selectedVal = new SelectList(model.Roles);
+            var admin = new Admin();
 
             if(ModelState.IsValid) 
             {
-                var admin = new Admin()
+                 admin = new Admin()
                 {
                     FirstName = model.FirstName,
                     LastName = model.LastName,
-                    MemberEmail = model.MemberEmail
-                   // RoleName = selectedVal.DataTextField
+                    MemberEmail = model.MemberEmail,
+                    Password = "Test",
+                    RoleName = model.RoleName                    
                 };
 
-                return View(admin);
+                DBContext.Admin.Add(admin);
             }
 
-            return null;
+            return View(model);
         }
 
         [HttpGet]

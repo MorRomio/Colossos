@@ -9,7 +9,8 @@ using System.Web.Mvc;
 namespace AuthSys.Models
 {
     public class Member //Implementing IEnumerable makes sure we can loop over the members in the View
-    {     
+    {
+        [Key]
         public int MemberID { get; set; }
 
         [Display(Name = "Medlemskort")]
@@ -42,7 +43,7 @@ namespace AuthSys.Models
         [Display(Name = "Alder")]
         public int Age { get; set; }
 
-        [Display(Name="Sportsgren")]
+        [Display(Name="Sportsgren(e)")]
         public string SportTypes { get; set; }
 
         [Display(Name ="Har kort?")]

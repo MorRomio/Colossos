@@ -6,6 +6,7 @@ namespace AuthSys.Models
 {
     public class Admin
     {
+        [Key]
         public int MemberID { get; set; }
 
         [Display(Name = "Fornavn")]
@@ -22,7 +23,6 @@ namespace AuthSys.Models
 
         [Display(Name = "Rolle")]
         public string RoleName { get; set; }
-
 
         public IEnumerable<SelectListItem> Roles { get; set; }
     }

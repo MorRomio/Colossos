@@ -14,6 +14,7 @@ namespace AuthSys.DataAccessLayer
         public DbSet<Card> Cards { get; set; }
         public DbSet<Member> Members { get; set; }
         public DbSet<Roles> Roles { get; set; }
+        public DbSet<Admin> Admin { get; set; }
 
         //Specify the connection string
         public ColossosContext() : base("ColosseumContext")

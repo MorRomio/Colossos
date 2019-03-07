@@ -7,26 +7,6 @@
     });
 </script>
 
-<script>
-    $(function () {
-        // Reference the auto-generated proxy for the hub.
-        var signalRhub = $.connection.hubSignalR;
-
-        //Client function that will be called by the server, when there is a notification
-        signalRhub.client.TestMessages = function (msgFromServer) {
-            console.log("From server: " + msgFromServer);
-        };
-
-        //Start connection
-        $.connection.hub.start().done(function () {
-            $("#knap").click(function () {
-                //Call the method on the server
-                signalRhub.server.test();
-            });
-        });
-    });
-</script>
-
 <h2>Tilføj admin</h2>
 
 @using (Html.BeginForm())
@@ -65,7 +45,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.RoleName, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-               @Html.DropDownListFor(model => model.Roles, new SelectList(Model.Roles, "Value", "Value"), new { @class = "text-danger AddMemberControls" })
+               @Html.DropDownListFor(model => model.Roles, new SelectList(Model.Roles, "Text", "Value"), new { @class = "text-danger AddMemberControls" })
             </div>
         </div>
 
