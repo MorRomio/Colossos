@@ -58,3 +58,5 @@ C:\git\colossos\AuthSys\AuthSys\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
 C:\git\colossos\AuthSys\AuthSys\obj\Debug\AuthSys.dll
 C:\git\colossos\AuthSys\AuthSys\obj\Debug\AuthSys.pdb
 C:\git\colossos\AuthSys\AuthSys\obj\Debug\AuthSys.csprojResolveAssemblyReference.cache
+C:\git\colossos\AuthSys\AuthSys\bin\log4net.dll
+C:\git\colossos\AuthSys\AuthSys\bin\log4net.xml

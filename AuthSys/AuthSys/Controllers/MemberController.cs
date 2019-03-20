@@ -12,13 +12,15 @@ using System.Data.Entity.Infrastructure;
 using System.Data.Entity.Validation;
 using Microsoft.AspNet.SignalR;
 using AuthSys.SignalRhub;
+using log4net;
 
 namespace AuthSys.Controllers
 {
     public class MemberController : Controller
     {
         private ColossosContext DBContext = new ColossosContext();
-        private HubSignalR signalR = new HubSignalR();       
+        private HubSignalR signalR = new HubSignalR();
+        private ILog infoLog = log4net.LogManager.GetLogger(typeof(HomeController));
 
         public ActionResult SearchMembers(string searchString)
         {
@@ -33,6 +35,8 @@ namespace AuthSys.Controllers
             }
 
             var members = DBContext.Members.Where(m => m.FirstName.Contains(searchString) || m.LastName.Contains(searchString));
+
+            infoLog.Info("Searched for: " + searchString);
 
             return View("RegisteredMembers", members);
         }
@@ -64,6 +68,8 @@ namespace AuthSys.Controllers
             {
                 DBContext.Members.Add(member);
                 DBContext.SaveChanges();
+
+                infoLog.Info("Member: " + model.FirstName + " " + model.LastName + " added");
 
                 ViewBag.TextColor = "Green";
                 ViewBag.Message = "Medlem tilføjet";

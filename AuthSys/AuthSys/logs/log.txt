@@ -1,0 +1,1 @@
+DEBUG 2019-03-07 14:39:56,003 56352ms HomeController         AddMember          - Member: Magiq Maighz added
